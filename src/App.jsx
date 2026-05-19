@@ -153,11 +153,11 @@ const BeforeAfterSlider = () => {
     <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] shadow-2xl aspect-[16/9] group cursor-col-resize select-none touch-none"
          ref={containerRef} onMouseMove={handleMove} onTouchMove={handleMove}>
       <div className="absolute inset-0 w-full h-full">
-        <img src="/images/exterior-designs-hero.avif" alt="After Transformation" loading="lazy" className="object-cover w-full h-full" />
-        <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 ${BRAND_COLORS.bg} text-white px-4 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black shadow-lg uppercase tracking-tighter`}>After Reconstruction</div>
+        <img src="/images/exterior-designs-hero.avif" alt="After Transformation" loading="lazy" width="1200" height="675" className="object-cover w-full h-full" />
+        <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 ${BRAND_COLORS.bg} text-slate-950 px-4 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black shadow-lg uppercase tracking-tighter`}>After Reconstruction</div>
       </div>
       <div className="absolute inset-0 w-full h-full overflow-hidden transition-none border-r-2 md:border-r-4 border-white" style={{ width: `${sliderPos}%` }}>
-        <img src="/images/driveway-rebuild-before.avif" alt="Before Reconstruction" loading="lazy" className="object-cover h-full" style={{ width: `calc(100 * ${100/safePos}%)` }} />
+        <img src="/images/driveway-rebuild-before.avif" alt="Before Reconstruction" loading="lazy" width="1200" height="675" className="object-cover h-full" style={{ width: `calc(100 * ${100/safePos}%)` }} />
         <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 bg-slate-800 text-white px-4 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black shadow-lg uppercase tracking-tighter">Before</div>
       </div>
       <div className="absolute inset-y-0 z-10 w-1 bg-white" style={{ left: `${sliderPos}%` }}>
@@ -237,7 +237,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
               <div className="space-y-3">
                 <input required placeholder="Your Name" className="w-full p-5 bg-slate-50 border-none rounded-2xl outline-none focus:ring-2 ring-[#f4a21b] text-lg" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
                 <input required placeholder="Phone Number" type="tel" className="w-full p-5 bg-slate-50 border-none rounded-2xl outline-none focus:ring-2 ring-[#f4a21b] text-lg" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
-                <button type="submit" disabled={isSubmitting} className={`w-full ${BRAND_COLORS.bg} text-white py-5 rounded-2xl font-black text-xl ${BRAND_COLORS.hover} shadow-xl flex items-center justify-center gap-2`}>
+                <button type="submit" disabled={isSubmitting} className={`w-full ${BRAND_COLORS.bg} text-slate-950 py-5 rounded-2xl font-black text-xl ${BRAND_COLORS.hover} shadow-xl flex items-center justify-center gap-2`}>
                   {isSubmitting ? <Loader2 className="animate-spin" /> : 'Get My Estimate'}
                 </button>
               </div>
@@ -270,6 +270,20 @@ export default function App() {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Preload primary LCP hero image as soon as components begin initialization 
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = '/images/exterior-designs-hero.avif';
+    link.type = 'image/avif';
+    link.setAttribute('fetchpriority', 'high');
+    document.head.appendChild(link);
+    return () => {
+      document.head.removeChild(link);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -313,7 +327,7 @@ export default function App() {
             <a href="#work" onClick={(e) => smoothScroll(e, 'work')} className={`hover:${BRAND_COLORS.primary} transition-colors`}>Portfolio</a>
             <a href="#about" onClick={(e) => smoothScroll(e, 'about')} className={`hover:${BRAND_COLORS.primary} transition-colors`}>About Us</a>
             <a href="#faq" onClick={(e) => smoothScroll(e, 'faq')} className={`hover:${BRAND_COLORS.primary} transition-colors`}>FAQ</a>
-            <button onClick={() => setIsQuoteOpen(true)} className={`${BRAND_COLORS.bg} text-white px-6 py-3.5 rounded-full ${BRAND_COLORS.hover} transition-all shadow-xl shadow-[#f4a21b]/10 transform hover:-translate-y-0.5`}>Get a Quote</button>
+            <button onClick={() => setIsQuoteOpen(true)} className={`${BRAND_COLORS.bg} text-slate-950 px-6 py-3.5 rounded-full ${BRAND_COLORS.hover} transition-all shadow-xl shadow-[#f4a21b]/10 transform hover:-translate-y-0.5`}>Get a Quote</button>
           </div>
 
           <button aria-label="Toggle Menu" className="md:hidden p-2 bg-slate-50 rounded-lg text-slate-900" onClick={() => setMobileMenu(!mobileMenu)}>
@@ -327,7 +341,7 @@ export default function App() {
              <a href="#services" onClick={(e) => smoothScroll(e, 'services')} className="font-bold text-slate-600 text-xl text-left">Services</a>
              <a href="#work" onClick={(e) => smoothScroll(e, 'work')} className="font-bold text-slate-600 text-xl text-left">Portfolio</a>
              <a href="#about" onClick={(e) => smoothScroll(e, 'about')} className="font-bold text-slate-600 text-xl text-left">About Us</a>
-             <button onClick={() => { setMobileMenu(false); setIsQuoteOpen(true); }} className={`${BRAND_COLORS.bg} text-white py-5 rounded-2xl font-black text-xl`}>Get a Quote</button>
+             <button onClick={() => { setMobileMenu(false); setIsQuoteOpen(true); }} className={`${BRAND_COLORS.bg} text-slate-950 py-5 rounded-2xl font-black text-xl`}>Get a Quote</button>
           </div>
         )}
       </nav>
@@ -346,7 +360,7 @@ export default function App() {
               ICPI certified craftsmanship that transforms cracked surfaces into high-performance interlocking masterpieces.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 md:gap-5">
-              <button onClick={() => setIsQuoteOpen(true)} className={`group flex items-center justify-center gap-3 bg-slate-900 text-white px-8 py-5 md:px-10 md:py-6 rounded-2xl md:rounded-[2rem] font-black text-lg md:text-xl hover:${BRAND_COLORS.bg} transition-all shadow-2xl shadow-slate-200`}>
+              <button onClick={() => setIsQuoteOpen(true)} className={`group flex items-center justify-center gap-3 bg-slate-900 text-white px-8 py-5 md:px-10 md:py-6 rounded-2xl md:rounded-[2rem] font-black text-lg md:text-xl hover:${BRAND_COLORS.bg} hover:text-slate-950 transition-all shadow-2xl shadow-slate-200`}>
                 Instant Estimate <ArrowRight className="w-5 h-5 group-hover:translate-x-1" />
               </button>
               <a href={`tel:${BUSINESS_DATA.phone.replace(/\D/g,'')}`} className={`flex items-center justify-center gap-3 bg-white border-2 border-slate-100 text-slate-900 px-8 py-5 md:px-10 md:py-6 rounded-2xl md:rounded-[2rem] font-black text-lg md:text-xl hover:border-[#f4a21b] transition-all`}>
@@ -356,7 +370,7 @@ export default function App() {
           </div>
           <div className="relative">
              <div className={`absolute -inset-10 bg-[#f4a21b]/5 rounded-[5rem] blur-3xl -z-10 animate-pulse`}></div>
-             <img src="/images/exterior-designs-hero.avif" alt="Luxury Paver Installation" fetchpriority="high" className="rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl object-cover aspect-[4/5] lg:aspect-[3/4] border-4 md:border-8 border-white" />
+             <img src="/images/exterior-designs-hero.avif" alt="Luxury Paver Installation" fetchpriority="high" width="600" height="750" className="rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl object-cover aspect-[4/5] lg:aspect-[3/4] border-4 md:border-8 border-white" />
           </div>
         </div>
       </header>
@@ -365,7 +379,7 @@ export default function App() {
       <section id="transformation" className="py-20 md:py-24 bg-slate-50 px-6">
         <div className="max-w-7xl mx-auto text-center mb-12 md:mb-16 space-y-4">
           <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900">The Transformation</h2>
-          <p className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed">Slide to see the difference between cracked concrete and our premium pavers.</p>
+          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto font-medium leading-relaxed">Slide to see the difference between cracked concrete and our premium pavers.</p>
           <div className="mt-8 md:mt-12">
             <BeforeAfterSlider />
           </div>
@@ -401,7 +415,7 @@ export default function App() {
                 <span className={`${BRAND_COLORS.primary} font-black uppercase tracking-[0.2em] text-xs`}>Technical Excellence</span>
               </div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-none text-slate-900">The <span className={BRAND_COLORS.primary}>ICPI</span> Standard.</h2>
-              <p className="text-base md:text-lg text-slate-500 leading-relaxed font-medium">
+              <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
                 Every project we execute follows strict Interlocking Concrete Pavement Institute specifications to ensure your investment never shifts or fails.
               </p>
               <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
@@ -411,7 +425,7 @@ export default function App() {
                       {step.icon}
                     </div>
                     <h4 className="text-lg font-bold text-slate-900 leading-tight">{step.title}</h4>
-                    <p className="text-slate-500 text-sm md:text-base leading-relaxed font-medium">{step.desc}</p>
+                    <p className="text-slate-600 text-sm md:text-base leading-relaxed font-medium">{step.desc}</p>
                   </div>
                 ))}
               </div>
@@ -471,14 +485,14 @@ export default function App() {
               </div>
             </div>
             <div className="relative w-full">
-              <img src="/images/exterior-designs-hero.avif" alt="Direct Partnership" loading="lazy" className="rounded-2xl md:rounded-[3rem] shadow-2xl border-4 md:border-8 border-white w-full" />
+              <img src="/images/exterior-designs-hero.avif" alt="Direct Partnership" loading="lazy" width="800" height="1000" className="rounded-2xl md:rounded-[3rem] shadow-2xl border-4 md:border-8 border-white w-full" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-20 md:py-24 bg-white px-6">
+      <section id="team" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 600px' }} className="py-20 md:py-24 bg-white px-6">
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-12 md:mb-16 space-y-4">
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 leading-none">Meet Todd & Flavio.</h2>
@@ -487,12 +501,12 @@ export default function App() {
               {TEAM.map((member, idx) => (
                 <div key={idx} className="group relative bg-slate-50 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border border-slate-100 hover:shadow-2xl transition-all text-left">
                   <div className="aspect-[4/5] overflow-hidden bg-slate-200">
-                    <img src={member.img} alt={member.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <img src={member.img} alt={member.name} loading="lazy" width="400" height="500" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   </div>
                   <div className="p-8 md:p-10 space-y-4 relative bg-white">
-                    <div className={`inline-block ${BRAND_COLORS.bg} text-white px-4 py-1.5 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest leading-none`}>{member.role}</div>
+                    <div className={`inline-block ${BRAND_COLORS.bg} text-slate-950 px-4 py-1.5 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest leading-none`}>{member.role}</div>
                     <h3 className="text-2xl font-black text-slate-900 leading-none">{member.name}</h3>
-                    <p className="text-slate-500 text-sm md:text-base leading-relaxed font-medium">{member.bio}</p>
+                    <p className="text-slate-600 text-sm md:text-base leading-relaxed font-medium">{member.bio}</p>
                   </div>
                 </div>
               ))}
@@ -501,7 +515,7 @@ export default function App() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 md:py-24 bg-slate-50 px-6">
+      <section id="faq" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 500px' }} className="py-20 md:py-24 bg-slate-50 px-6">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 md:mb-16 space-y-4">
             <div className={`inline-flex items-center gap-2 ${BRAND_COLORS.primary} font-black uppercase tracking-widest text-xs`}>Expert Answers</div>
@@ -514,7 +528,7 @@ export default function App() {
                   <HelpCircle className={`w-6 h-6 ${BRAND_COLORS.primary} shrink-0 mt-0.5`} />
                   <h4 className="text-lg md:text-xl font-bold text-slate-900 leading-tight">{item.q}</h4>
                 </div>
-                <p className="text-slate-500 text-sm md:text-base leading-relaxed pl-10 font-medium">{item.a}</p>
+                <p className="text-slate-600 text-sm md:text-base leading-relaxed pl-10 font-medium">{item.a}</p>
               </div>
             ))}
           </div>
@@ -522,7 +536,7 @@ export default function App() {
       </section>
 
       {/* Coverage Area */}
-      <section id="coverage" className="py-20 md:py-24 bg-white overflow-hidden px-6 text-left">
+      <section id="coverage" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 500px' }} className="py-20 md:py-24 bg-white overflow-hidden px-6 text-left">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="space-y-8">
             <div className={`inline-flex items-center gap-2 ${BRAND_COLORS.primary} font-black uppercase tracking-widest text-xs`}>Local Service</div>
@@ -557,19 +571,19 @@ export default function App() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="work" className="py-20 md:py-24 bg-white px-6">
+      <section id="work" style={{ contentVisibility: 'auto', containIntrinsicSize: '0 800px' }} className="py-20 md:py-24 bg-white px-6">
         <div className="max-w-7xl mx-auto text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 mb-6 leading-none">Our Craftsmanship</h2>
           <div className="flex flex-wrap justify-center gap-2">
             {['All', 'Driveways', 'Patios'].map(cat => (
-              <button key={cat} onClick={() => setFilter(cat)} className={`px-5 py-2 md:px-6 md:py-2 rounded-full text-sm font-bold transition-all ${filter === cat ? `${BRAND_COLORS.bg} text-white shadow-lg` : 'bg-slate-50 text-slate-500 hover:bg-slate-100'}`}>{cat}</button>
+              <button key={cat} onClick={() => setFilter(cat)} className={`px-5 py-2 md:px-6 md:py-2 rounded-full text-sm font-bold transition-all ${filter === cat ? `${BRAND_COLORS.bg} text-slate-950 shadow-lg` : 'bg-slate-50 text-slate-500 hover:bg-slate-100'}`}>{cat}</button>
             ))}
           </div>
         </div>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filteredProjects.map((project) => (
             <div key={project.id} onClick={() => setSelectedImg(project.img)} className="group relative overflow-hidden rounded-2xl md:rounded-[2rem] bg-slate-100 aspect-[4/5] cursor-zoom-in">
-              <img src={project.img} alt={project.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={project.img} alt={project.title} loading="lazy" width="400" height="500" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                  <div className="bg-white/20 backdrop-blur-md p-4 rounded-full text-white scale-50 group-hover:scale-100 transition-transform duration-500">
                     <Search className="w-8 h-8" />
@@ -593,7 +607,7 @@ export default function App() {
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-tight text-white">Ready for a <br className="hidden md:block"/>Better Exterior?</h2>
               <p className="text-lg md:text-xl text-slate-400 font-medium max-w-md">Contact Todd directly for an on-site consultation.</p>
             </div>
-            <button onClick={() => setIsQuoteOpen(true)} className={`${BRAND_COLORS.bg} text-white px-10 py-6 md:px-12 md:py-7 rounded-2xl md:rounded-[2rem] font-black text-xl md:text-2xl ${BRAND_COLORS.hover} transition-all shadow-2xl w-full md:w-auto leading-none`}>Start My Quote</button>
+            <button onClick={() => setIsQuoteOpen(true)} className={`${BRAND_COLORS.bg} text-slate-950 px-10 py-6 md:px-12 md:py-7 rounded-2xl md:rounded-[2rem] font-black text-xl md:text-2xl ${BRAND_COLORS.hover} transition-all shadow-2xl w-full md:w-auto leading-none`}>Start My Quote</button>
           </div>
           
           <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-slate-100 text-slate-500 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] gap-8">
