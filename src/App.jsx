@@ -91,17 +91,17 @@ const TESTIMONIALS = [
 ];
 
 const TEAM = [
-  { name: "Todd", role: "Owner & Lead Consultant", bio: "With years of experience, Todd oversees every design and site assessment personally to ensure all work meets ICPI specifications.", img: "/images/team-todd.png" },
-  { name: "Flavio", role: "Owner & Operations", bio: "As a co-owner, Flavio takes pride in each project, ensuring technical execution is flawless.", img: "/images/team-operations.png" }
+  { name: "Todd", role: "Owner & Lead Consultant", bio: "With years of experience, Todd oversees every design and site assessment personally to ensure all work meets ICPI specifications.", img: "/images/team-todd.avif" },
+  { name: "Flavio", role: "Owner & Operations", bio: "As a co-owner, Flavio takes pride in each project, ensuring technical execution is flawless.", img: "/images/team-operations.avif" }
 ];
 
 const PORTFOLIO_PROJECTS = [
-  { id: 1, category: 'Driveways', title: 'Modern Slate Driveway', location: 'Menlo Park, CA', img: '/images/menlo-park-slate-driveway.png' },
-  { id: 2, category: 'Patios', title: 'Tuscan Style Patio', location: 'San Carlos, CA', img: '/images/san-carlos-tuscan-patio-macro.png' },
-  { id: 3, category: 'Walkways', title: 'Contemporary Walkway', location: 'Palo Alto, CA', img: '/images/palo-alto-permeable-drainage.png' },
-  { id: 4, category: 'Driveways', title: 'Herringbone Classic', location: 'Atherton, CA', img: '/images/atherton-herringbone-classic.png' },
-  { id: 5, category: 'Patios', title: 'Entertainment Deck', location: 'Burlingame, CA', img: '/images/burlingame-entertainment-deck.png' },
-  { id: 6, category: 'Driveways', title: 'Cobblestone Entrance', location: 'Los Altos, CA', img: '/images/exterior-designs-hero.png' }
+  { id: 1, category: 'Driveways', title: 'Modern Slate Driveway', location: 'Menlo Park, CA', img: '/images/menlo-park-slate-driveway.avif' },
+  { id: 2, category: 'Patios', title: 'Tuscan Style Patio', location: 'San Carlos, CA', img: '/images/san-carlos-tuscan-patio-macro.avif' },
+  { id: 3, category: 'Walkways', title: 'Contemporary Walkway', location: 'Palo Alto, CA', img: '/images/palo-alto-permeable-drainage.avif' },
+  { id: 4, category: 'Driveways', title: 'Herringbone Classic', location: 'Atherton, CA', img: '/images/atherton-herringbone-classic.avif' },
+  { id: 5, category: 'Patios', title: 'Entertainment Deck', location: 'Burlingame, CA', img: '/images/burlingame-entertainment-deck.avif' },
+  { id: 6, category: 'Driveways', title: 'Cobblestone Entrance', location: 'Los Altos, CA', img: '/images/exterior-designs-hero.avif' }
 ];
 
 const ICPI_STEPS = [
@@ -153,11 +153,11 @@ const BeforeAfterSlider = () => {
     <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] shadow-2xl aspect-[16/9] group cursor-col-resize select-none touch-none"
          ref={containerRef} onMouseMove={handleMove} onTouchMove={handleMove}>
       <div className="absolute inset-0 w-full h-full">
-        <img src="/images/exterior-designs-hero.png" alt="After Transformation" className="object-cover w-full h-full" />
+        <img src="/images/exterior-designs-hero.avif" alt="After Transformation" loading="lazy" className="object-cover w-full h-full" />
         <div className={`absolute bottom-4 right-4 md:bottom-8 md:right-8 ${BRAND_COLORS.bg} text-white px-4 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black shadow-lg uppercase tracking-tighter`}>After Reconstruction</div>
       </div>
       <div className="absolute inset-0 w-full h-full overflow-hidden transition-none border-r-2 md:border-r-4 border-white" style={{ width: `${sliderPos}%` }}>
-        <img src="/images/driveway-rebuild-before.png" alt="Before Reconstruction" className="object-cover h-full" style={{ width: `calc(100 * ${100/safePos}%)` }} />
+        <img src="/images/driveway-rebuild-before.avif" alt="Before Reconstruction" loading="lazy" className="object-cover h-full" style={{ width: `calc(100 * ${100/safePos}%)` }} />
         <div className="absolute bottom-4 left-4 md:bottom-8 md:left-8 bg-slate-800 text-white px-4 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black shadow-lg uppercase tracking-tighter">Before</div>
       </div>
       <div className="absolute inset-y-0 z-10 w-1 bg-white" style={{ left: `${sliderPos}%` }}>
@@ -316,7 +316,7 @@ export default function App() {
             <button onClick={() => setIsQuoteOpen(true)} className={`${BRAND_COLORS.bg} text-white px-6 py-3.5 rounded-full ${BRAND_COLORS.hover} transition-all shadow-xl shadow-[#f4a21b]/10 transform hover:-translate-y-0.5`}>Get a Quote</button>
           </div>
 
-          <button className="md:hidden p-2 bg-slate-50 rounded-lg text-slate-900" onClick={() => setMobileMenu(!mobileMenu)}>
+          <button aria-label="Toggle Menu" className="md:hidden p-2 bg-slate-50 rounded-lg text-slate-900" onClick={() => setMobileMenu(!mobileMenu)}>
             {mobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -356,7 +356,7 @@ export default function App() {
           </div>
           <div className="relative">
              <div className={`absolute -inset-10 bg-[#f4a21b]/5 rounded-[5rem] blur-3xl -z-10 animate-pulse`}></div>
-             <img src="/images/exterior-designs-hero.png" alt="Luxury Paver Installation" className="rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl object-cover aspect-[4/5] lg:aspect-[3/4] border-4 md:border-8 border-white" />
+             <img src="/images/exterior-designs-hero.avif" alt="Luxury Paver Installation" fetchpriority="high" className="rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl object-cover aspect-[4/5] lg:aspect-[3/4] border-4 md:border-8 border-white" />
           </div>
         </div>
       </header>
@@ -419,7 +419,7 @@ export default function App() {
             <div className="lg:w-1/2 bg-slate-950 p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] text-white relative overflow-hidden w-full">
                <Award className={`w-12 h-12 ${BRAND_COLORS.accent} mb-8`} />
                <h3 className="text-2xl md:text-3xl font-black mb-4 tracking-tight leading-tight uppercase">Engineering for Longevity</h3>
-               <p className="text-slate-400 text-base leading-relaxed font-medium">By adhering to engineering guidelines, we guarantee a flexible pavement system that withstands heavy loads better than traditional concrete.</p>
+               <p className="text-slate-400 text-base leading-relaxed mb-10 font-medium">By adhering to engineering guidelines, we guarantee a flexible pavement system that withstands heavy loads better than traditional concrete.</p>
                <div className="pt-8 border-t border-white/10 flex justify-between gap-2">
                   <div className="text-center md:text-left"><div className="text-xl md:text-2xl font-black">98%</div><div className={`text-[10px] md:text-xs text-slate-500 uppercase mt-1 tracking-widest`}>Compaction</div></div>
                   <div className="text-center md:text-left"><div className="text-xl md:text-2xl font-black">30+ Yrs</div><div className={`text-[10px] md:text-xs text-slate-500 uppercase mt-1 tracking-widest`}>Lifespan</div></div>
@@ -433,7 +433,7 @@ export default function App() {
       <section id="environmental" className="py-20 md:py-24 bg-slate-900 text-white relative px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
             <div className="order-2 lg:order-1 flex justify-center items-center w-full">
-              <img src="/images/permeable-paver-layers.png" alt="Eco-Friendly" className="relative w-full h-auto shadow-2xl border-2 border-white/5 block rounded-xl md:rounded-none" />
+              <img src="/images/permeable-paver-layers.avif" alt="Eco-Friendly" loading="lazy" width="630" height="344" className="relative w-full h-auto shadow-2xl border-2 border-white/5 block rounded-xl md:rounded-none" />
             </div>
             <div className="space-y-8 order-1 lg:order-2">
               <div className={`inline-block bg-[#a8c69f]/10 ${BRAND_COLORS.accent} border border-[#a8c69f]/20 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest`}>Responsibility</div>
@@ -471,7 +471,7 @@ export default function App() {
               </div>
             </div>
             <div className="relative w-full">
-              <img src="/images/exterior-designs-hero.png" alt="Direct Partnership" className="rounded-2xl md:rounded-[3rem] shadow-2xl border-4 md:border-8 border-white w-full" />
+              <img src="/images/exterior-designs-hero.avif" alt="Direct Partnership" loading="lazy" className="rounded-2xl md:rounded-[3rem] shadow-2xl border-4 md:border-8 border-white w-full" />
             </div>
           </div>
         </div>
@@ -487,7 +487,7 @@ export default function App() {
               {TEAM.map((member, idx) => (
                 <div key={idx} className="group relative bg-slate-50 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border border-slate-100 hover:shadow-2xl transition-all text-left">
                   <div className="aspect-[4/5] overflow-hidden bg-slate-200">
-                    <img src={member.img} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <img src={member.img} alt={member.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   </div>
                   <div className="p-8 md:p-10 space-y-4 relative bg-white">
                     <div className={`inline-block ${BRAND_COLORS.bg} text-white px-4 py-1.5 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest leading-none`}>{member.role}</div>
@@ -569,7 +569,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filteredProjects.map((project) => (
             <div key={project.id} onClick={() => setSelectedImg(project.img)} className="group relative overflow-hidden rounded-2xl md:rounded-[2rem] bg-slate-100 aspect-[4/5] cursor-zoom-in">
-              <img src={project.img} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+              <img src={project.img} alt={project.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                  <div className="bg-white/20 backdrop-blur-md p-4 rounded-full text-white scale-50 group-hover:scale-100 transition-transform duration-500">
                     <Search className="w-8 h-8" />
@@ -605,8 +605,8 @@ export default function App() {
               <span>© {new Date().getFullYear()} {BUSINESS_DATA.name}</span>
             </div>
             <div className="flex gap-8 items-center">
-              <a href={BUSINESS_DATA.social.facebook} className={`hover:${BRAND_COLORS.primary} transition-colors`}><FacebookIcon className="w-5 h-5" /></a>
-              <a href={BUSINESS_DATA.social.yelp} className={`hover:${BRAND_COLORS.primary} transition-colors`}><YelpIcon className="w-5 h-5" /></a>
+              <a href={BUSINESS_DATA.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook profile" className={`hover:${BRAND_COLORS.primary} transition-colors`}><FacebookIcon className="w-5 h-5" /></a>
+              <a href={BUSINESS_DATA.social.yelp} target="_blank" rel="noopener noreferrer" aria-label="Read our Yelp reviews" className={`hover:${BRAND_COLORS.primary} transition-colors`}><YelpIcon className="w-5 h-5" /></a>
               <span className="text-sm tracking-normal lowercase">{BUSINESS_DATA.email}</span>
             </div>
           </div>
